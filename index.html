@@ -967,7 +967,7 @@
 
       <!-- One Pound -->
       <div class="disco-item" onclick="openModal('onepound')">
-        <img src="images/albums/one-pound.jpg" alt="One Pound" onerror="this.src='https://f4.bcbits.com/img/a2536631543_5.jpg'" />
+        <img src="https://f4.bcbits.com/img/a2536631543_5.jpg" alt="One Pound" />
         <div class="disco-always">
           <div class="disco-type">EP · 2018</div>
           <div class="disco-title">One Pound</div>
@@ -979,7 +979,7 @@
 
       <!-- Foremast -->
       <div class="disco-item" onclick="openModal('foremast')">
-        <img src="images/albums/foremast.jpg" alt="Foremast" onerror="this.src='https://f4.bcbits.com/img/a2536631543_5.jpg'" />
+        <img src="https://f4.bcbits.com/img/a2536631543_5.jpg" alt="Foremast" />
         <div class="disco-always">
           <div class="disco-type">Single · 2018</div>
           <div class="disco-title">Foremast</div>
@@ -1205,8 +1205,8 @@
     onepound: {
       title: 'One Pound',
       meta: 'EP · December 2018 · Artwork by Courtney Blair',
-      art: 'images/albums/one-pound.jpg',
-      artFallback: 'https://f4.bcbits.com/img/a2536631543_5.jpg',
+      art: 'https://f4.bcbits.com/img/a2536631543_5.jpg',
+      
       tracks: ['Covenant', 'One Pound', 'Korihor', 'Foremast', 'Burrowed'],
       links: [
         { label: 'Bandcamp', url: 'https://swarmer.bandcamp.com/album/one-pound' },
@@ -1217,7 +1217,7 @@
     foremast: {
       title: 'Foremast',
       meta: 'Single · September 2018',
-      art: 'images/albums/foremast.jpg',
+      art: 'https://f4.bcbits.com/img/a2536631543_5.jpg',
       tracks: ['Foremast'],
       links: [
         { label: 'Bandcamp', url: 'https://swarmer.bandcamp.com/track/foremast' },
@@ -1231,8 +1231,6 @@
     const artEl = document.getElementById('modalArt');
     artEl.src = r.art;
     artEl.alt = r.title;
-    if (r.artFallback) {
-      artEl.onerror = () => { artEl.src = r.artFallback; };
     }
     document.getElementById('modalTitle').textContent = r.title;
     document.getElementById('modalMeta').textContent = r.meta;
