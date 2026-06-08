@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWARMER — Utah Desert Metal</title>
+  <meta name="description" content="Low, heavy, ethereal, relentless progressive post-metal from Salt Lake City, Utah. SWARMER — signed to Braeburn Records." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow+Condensed:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --bg:        #0d0b09;
+      --bg-raised: #131009;
+      --accent:    #a0442a;
+      --accent-dim:#7a3220;
+      --text:      #e8e4de;
+      --text-dim:  #8a8278;
+      --text-muted:#5a5550;
+      --border:    rgba(232,228,222,0.08);
+      --border-accent: rgba(160,68,42,0.35);
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== UTILITY ===== */
+    .mono       { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .label      { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+    .accent-line { display: inline-block; width: 32px; height: 1px; background: var(--accent); vertical-align: middle; margin-right: 12px; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .section-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .section-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    section { padding: 96px 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 32px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13,11,9,0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav-logo img {
+      height: 22px;
+      width: auto;
+      opacity: 0.9;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.nav-epk {
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+      padding: 4px 12px;
+    }
+    .nav-links a.nav-epk:hover { background: var(--accent); color: var(--text); }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--text);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 56px; left: 0; right: 0;
+      background: rgba(13,11,9,0.97);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      padding: 24px 32px;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .mobile-menu a.nav-epk { color: var(--accent); }
+
+    /* ===== FLOATING SOCIAL BAR ===== */
+    .social-float {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+    .social-float a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      opacity: 0.4;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .social-float a:hover { opacity: 1; transform: scale(1.15); }
+    .social-float svg { width: 16px; height: 16px; fill: var(--text); }
+    .social-float .float-line {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://f4.bcbits.com/img/a3376614292_5.jpg');
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.22) saturate(0.4);
+      transform: scale(1.04);
+      transition: transform 12s ease-out;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(13,11,9,0.7) 80%, var(--bg) 100%);
+    }
+    .hero-bottom-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      animation: heroFadeIn 1.4s ease both;
+    }
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-logo {
+      width: clamp(200px, 40vw, 420px);
+      margin: 0 auto 24px;
+      opacity: 0.97;
+    }
+    .hero-location {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-tagline {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      color: var(--text-dim);
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      border: 1px solid;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text-dim);
+    }
+    .btn-secondary:hover { border-color: var(--text-dim); color: var(--text); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.35;
+      animation: scrollBob 2s ease-in-out infinite;
+    }
+    @keyframes scrollBob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-scroll span { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .hero-scroll svg { width: 16px; height: 16px; fill: var(--text); }
+
+    /* ===== LATEST RELEASE ===== */
+    #latest { background: var(--bg-raised); }
+    .latest-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .latest-art {
+      position: relative;
+    }
+    .latest-art img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      filter: brightness(0.95);
+    }
+    .latest-art::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 0 1px rgba(160,68,42,0.2);
+    }
+    .latest-label { margin-bottom: 8px; }
+    .latest-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .latest-meta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .latest-desc {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      max-width: 420px;
+    }
+    .stream-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .stream-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      transition: all 0.2s;
+    }
+    .stream-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== NEWS ===== */
+    #news { background: var(--bg); }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+    .news-item {
+      background: var(--bg);
+      padding: 32px;
+      transition: background 0.2s;
+    }
+    .news-item:hover { background: var(--bg-raised); }
+    .news-source {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .news-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .news-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .news-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .news-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .news-link:hover { gap: 10px; }
+    .news-link::after { content: '→'; }
+
+    /* ===== MUSIC / DISCOGRAPHY ===== */
+    #music { background: var(--bg-raised); }
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2px;
+    }
+    .disco-item {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: #111;
+    }
+    .disco-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: brightness(0.75) saturate(0.5);
+    }
+    .disco-item:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.4) saturate(0.3);
+    }
+    .disco-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      background: linear-gradient(to top, rgba(13,11,9,0.9) 0%, transparent 60%);
+    }
+    .disco-item:hover .disco-overlay { opacity: 1; }
+    .disco-always {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 16px 20px;
+      background: linear-gradient(to top, rgba(13,11,9,0.85), transparent);
+    }
+    .disco-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+    }
+    .disco-type {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .disco-hover-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      max-width: 680px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      position: relative;
+      animation: modalIn 0.25s ease both;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .modal-art { width: 200px; height: 200px; object-fit: cover; }
+    .modal-body { padding: 28px; }
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .modal-meta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .modal-tracks {
+      list-style: none;
+      margin-bottom: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .modal-tracks li {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+    }
+    .modal-tracks li .track-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      min-width: 20px;
+      margin-top: 2px;
+    }
+    .modal-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modal-close {
+      position: absolute;
+      top: 12px; right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+
+    /* ===== MERCH ===== */
+    #merch { background: var(--bg); }
+    .merch-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .merch-text .section-header { margin-bottom: 24px; }
+    .merch-desc {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+    .merch-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .merch-img-wrap {
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: #111;
+    }
+    .merch-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) saturate(0.7);
+      transition: filter 0.3s, transform 0.3s;
+    }
+    .merch-img-wrap:hover img { filter: brightness(1) saturate(1); transform: scale(1.04); }
+
+    /* ===== VIDEOS ===== */
+    #videos { background: var(--bg-raised); }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2px;
+    }
+    .video-item {}
+    .video-embed {
+      position: relative;
+      padding-bottom: 56.25%;
+      background: #000;
+    }
+    .video-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .video-info {
+      padding: 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+    .video-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .video-subtitle {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    /* ===== TOUR ===== */
+    #tour { background: var(--bg); }
+    .tour-empty {
+      padding: 64px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .tour-empty p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    /* ===== INFO / ABOUT ===== */
+    #info { background: var(--bg-raised); }
+    .info-inner {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      align-items: start;
+    }
+    .info-bio {
+      font-size: 1rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .info-bio strong { color: var(--text); font-weight: 600; }
+    .members-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .member {
+      padding: 20px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .member:hover { border-color: var(--border-accent); }
+    .member-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .member-role {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .member-prev {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .info-photo-wrap {
+      position: sticky;
+      top: 80px;
+    }
+    .info-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.88) saturate(0.4);
+      transition: filter 0.4s;
+    }
+    .info-photo-wrap:hover .info-photo { filter: brightness(0.95) saturate(0.6); }
+    .info-photo-credit {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 6px;
+    }
+    .label-section {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .label-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+    .braeburn-block {
+      margin-top: 32px;
+      padding: 20px;
+      border-left: 2px solid var(--accent);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 56px 0 40px;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+    .footer-logo img { height: 24px; opacity: 0.5; }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      list-style: none;
+    }
+    .footer-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .social-float { display: none; }
+      .latest-inner { grid-template-columns: 1fr; gap: 36px; }
+      .latest-art { max-width: 340px; margin: 0 auto; }
+      .merch-inner { grid-template-columns: 1fr; gap: 36px; }
+      .info-inner { grid-template-columns: 1fr; }
+      .info-photo-wrap { position: static; max-width: 380px; }
+      .modal { grid-template-columns: 1fr; }
+      .modal-art { width: 100%; height: 200px; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      section { padding: 64px 0; }
+      .members-grid { grid-template-columns: 1fr; }
+      .disco-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="images/logo-white.png" alt="SWARMER" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#news">News</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#merch">Merch</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#tour">Tour</a></li>
+    <li><a href="#info">Info</a></li>
+    <li><a href="epk.html" class="nav-epk">EPK</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#news" onclick="toggleMenu()">News</a>
+  <a href="#music" onclick="toggleMenu()">Music</a>
+  <a href="#merch" onclick="toggleMenu()">Merch</a>
+  <a href="#videos" onclick="toggleMenu()">Videos</a>
+  <a href="#tour" onclick="toggleMenu()">Tour</a>
+  <a href="#info" onclick="toggleMenu()">Info</a>
+  <a href="epk.html" class="nav-epk">EPK</a>
+</div>
+
+<!-- ===== FLOATING SOCIAL ===== -->
+<div class="social-float">
+  <div class="float-line"></div>
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/swarmermusic/" target="_blank" rel="noopener" title="Instagram">
+    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  </a>
+  <!-- Bandcamp -->
+  <a href="https://swarmer.bandcamp.com" target="_blank" rel="noopener" title="Bandcamp">
+    <svg viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+  </a>
+  <!-- Spotify -->
+  <a href="https://open.spotify.com/artist/6znLaPXU9q0o6C0zr7YoPy" target="_blank" rel="noopener" title="Spotify">
+    <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+  </a>
+  <!-- Apple Music -->
+  <a href="https://music.apple.com/us/artist/swarmer/1437441742" target="_blank" rel="noopener" title="Apple Music">
+    <svg viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.048-2.31-2.08-3.04a5.022 5.022 0 00-1.78-.73 7.55 7.55 0 00-1.5-.16c-.1-.01-.19-.01-.29-.01H5.896a6.65 6.65 0 00-.69.03 7.1 7.1 0 00-1.49.19 4.94 4.94 0 00-3.08 2.71 6.77 6.77 0 00-.57 2.29c-.02.29-.03.58-.03.87v11.29c0 .29.01.58.04.87.08.75.27 1.46.57 2.12a4.93 4.93 0 002.86 2.63c.56.21 1.14.34 1.73.39.29.03.58.04.87.04h11.29c.29 0 .58-.01.87-.04.75-.08 1.46-.27 2.12-.57a4.95 4.95 0 002.63-2.86c.21-.56.34-1.14.39-1.73.03-.29.04-.58.04-.87V7.01c-.001-.3-.011-.59-.031-.886zm-6.289 8.686l-.57.99a.893.893 0 01-1.23.33l-3.06-1.77a.903.903 0 01-.45-.78V7.13a.9.9 0 011.8 0v6.05l2.49 1.44a.9.9 0 01.33 1.23l-.31-.04z"/></svg>
+  </a>
+  <!-- YouTube -->
+  <a href="https://www.youtube.com/@SwarmerMusic" target="_blank" rel="noopener" title="YouTube">
+    <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+  </a>
+  <!-- Bandsintown -->
+  <a href="https://www.bandsintown.com/a/525679" target="_blank" rel="noopener" title="Bandsintown">
+    <svg viewBox="0 0 24 24"><path d="M10.757 3.053c-.78.162-1.584.594-2.268 1.23C7.245 5.44 6.516 7.053 6.516 8.7c0 1.944.945 3.726 2.484 4.806l.45.306-.162.099c-.765.468-1.566 1.35-2.034 2.232-.378.72-.567 1.44-.567 2.232 0 .846.189 1.566.612 2.268.855 1.44 2.412 2.304 4.068 2.304 1.044 0 1.998-.315 2.862-.954.306-.225.864-.783 1.098-1.098.423-.594.693-1.233.828-1.953.054-.306.063-.441.063-.882 0-.441-.009-.576-.063-.882-.135-.72-.405-1.359-.828-1.953-.234-.315-.792-.873-1.098-1.098-.306-.225-.765-.477-1.098-.594l-.342-.117.36-.234c.693-.459 1.278-1.053 1.71-1.755.63-1.035.936-2.304.828-3.492-.162-1.764-1.098-3.276-2.574-4.149-.567-.333-1.116-.513-1.755-.567-.243-.018-.306-.018-.549-.009-.18.009-.297.018-.45.045zm1.071 1.395c.783.153 1.476.612 1.944 1.296.342.495.504.99.504 1.557 0 .576-.18 1.125-.522 1.62-.459.657-1.152 1.098-1.944 1.224-.216.036-.63.036-.837 0-.792-.126-1.476-.567-1.944-1.224-.342-.495-.522-1.044-.522-1.62 0-1.305.873-2.475 2.106-2.844.36-.108.873-.126 1.215-.009zm.054 7.614c.603.117 1.125.405 1.575.864.486.495.765 1.08.855 1.773.027.189.027.603 0 .792-.09.693-.369 1.278-.855 1.773-.639.648-1.449.972-2.358.927-.819-.036-1.539-.369-2.106-.972-.486-.513-.747-1.098-.837-1.827-.018-.162-.018-.603 0-.765.099-.765.387-1.386.882-1.899.612-.63 1.395-.954 2.268-.9.189.009.441.045.576.234z"/></svg>
+  </a>
+  <div class="float-line"></div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-bottom-fade"></div>
+  <div class="hero-content">
+    <img src="images/logo-white.png" alt="SWARMER" class="hero-logo" />
+    <p class="hero-location">// Salt Lake City, Utah</p>
+    <p class="hero-tagline">Low, heavy, ethereal, relentless progressive post-metal</p>
+    <div class="hero-cta">
+      <a href="#latest" class="btn btn-primary">Listen Now</a>
+      <a href="#info" class="btn btn-secondary">About</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" transform="rotate(90 12 12)"/></svg>
+  </div>
+</section>
+
+<!-- ===== LATEST RELEASE ===== -->
+<section id="latest">
+  <div class="container">
+    <div class="latest-inner">
+      <div class="latest-art">
+        <img src="https://f4.bcbits.com/img/a3376614292_5.jpg" alt="Brutalist — SWARMER" />
+      </div>
+      <div class="latest-text">
+        <p class="label">// Latest Release</p>
+        <h2 class="latest-title">Brutalist</h2>
+        <p class="latest-meta">Full-Length &nbsp;·&nbsp; 2021 &nbsp;·&nbsp; Braeburn Records</p>
+        <p class="latest-desc">Six tracks of low, heavy, relentless post-metal — from the tightly-wound fury of Mediocre to the sprawling ten-minute closer God/Damn. Recorded at The Boar's Nest with Andy Patterson. Artwork by Courtney Blair.</p>
+        <div class="stream-links">
+          <a href="https://swarmer.bandcamp.com/album/brutalist" target="_blank" rel="noopener" class="stream-link">Bandcamp</a>
+          <a href="https://open.spotify.com/artist/6znLaPXU9q0o6C0zr7YoPy" target="_blank" rel="noopener" class="stream-link">Spotify</a>
+          <a href="https://music.apple.com/us/artist/swarmer/1437441742" target="_blank" rel="noopener" class="stream-link">Apple Music</a>
+          <a href="https://music.youtube.com/@SwarmerMusic" target="_blank" rel="noopener" class="stream-link">YouTube Music</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section id="news">
+  <div class="container">
+    <div class="section-header">
+      <h2>News &amp; Press</h2>
+      <span class="section-tag">// Latest</span>
+    </div>
+    <div class="news-grid">
+
+      <!-- Braeburn Signing -->
+      <div class="news-item">
+        <p class="news-source">Braeburn Records</p>
+        <p class="news-date">June 2025</p>
+        <h3 class="news-headline">SWARMER Signs to Braeburn Records</h3>
+        <p class="news-desc">Braeburn Records welcomes SWARMER to the label family. Plans include a CD re-issue of the debut EP <em>One Pound</em>, a vinyl pressing of <em>Brutalist</em>, and a new full-length in progress.</p>
+        <a href="https://www.instagram.com/p/DWWtSANjgoy/" target="_blank" rel="noopener" class="news-link">View Announcement</a>
+      </div>
+
+      <!-- SLUG Localized -->
+      <div class="news-item">
+        <p class="news-source">SLUG Magazine</p>
+        <p class="news-date">October 2025</p>
+        <h3 class="news-headline">Localized: SWARMER</h3>
+        <p class="news-desc">A full feature on SWARMER's collaborative process, influences, and upcoming new material — ahead of their October set at Urban Lounge.</p>
+        <a href="https://www.slugmag.com/music/interviews/localized/localized-swarmer/" target="_blank" rel="noopener" class="news-link">Read Full Article</a>
+      </div>
+
+      <!-- SLUG Soundwaves -->
+      <div class="news-item">
+        <p class="news-source">SLUG Soundwaves</p>
+        <p class="news-date">August 2021</p>
+        <h3 class="news-headline">Episode #370 — SWARMER</h3>
+        <p class="news-desc">The band joins SLUG's Soundwaves podcast to talk about the making of <em>Brutalist</em>, the creative process behind their Venn-diagram approach to songwriting, and what makes their democratic band dynamic work.</p>
+        <a href="https://www.slugmag.com/soundwaves/episode-370-swarmer/" target="_blank" rel="noopener" class="news-link">Listen to Episode</a>
+      </div>
+
+      <!-- Salt Lake City Weekly -->
+      <div class="news-item">
+        <p class="news-source">Salt Lake City Weekly</p>
+        <p class="news-date">April 2019</p>
+        <h3 class="news-headline">Radar: On!</h3>
+        <p class="news-desc">City Weekly spotlights SWARMER as one of Salt Lake's essential bands to watch — calling out <em>One Pound</em> as a debut that combines ferocious heavy metal with spacey psychedelic breakdowns.</p>
+        <a href="https://www.cityweekly.net/music/radar-on-13456285" target="_blank" rel="noopener" class="news-link">Read Article</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DISCOGRAPHY ===== -->
+<section id="music">
+  <div class="container">
+    <div class="section-header">
+      <h2>Discography</h2>
+      <span class="section-tag">// Click to stream or buy</span>
+    </div>
+    <div class="disco-grid">
+
+      <!-- Brutalist -->
+      <div class="disco-item" onclick="openModal('brutalist')">
+        <img src="https://f4.bcbits.com/img/a3376614292_5.jpg" alt="Brutalist" />
+        <div class="disco-always">
+          <div class="disco-type">Full-Length · 2021</div>
+          <div class="disco-title">Brutalist</div>
+        </div>
+        <div class="disco-overlay">
+          <div class="disco-hover-label">Stream &amp; Buy →</div>
+        </div>
+      </div>
+
+      <!-- Mediocre Single -->
+      <div class="disco-item" onclick="openModal('mediocre')">
+        <img src="https://f4.bcbits.com/img/a3376614292_5.jpg" alt="Mediocre" />
+        <div class="disco-always">
+          <div class="disco-type">Single · 2021</div>
+          <div class="disco-title">Mediocre</div>
+        </div>
+        <div class="disco-overlay">
+          <div class="disco-hover-label">Stream &amp; Buy →</div>
+        </div>
+      </div>
+
+      <!-- One Pound -->
+      <div class="disco-item" onclick="openModal('onepound')">
+        <img src="images/albums/one-pound.jpg" alt="One Pound" onerror="this.src='https://f4.bcbits.com/img/a2536631543_5.jpg'" />
+        <div class="disco-always">
+          <div class="disco-type">EP · 2018</div>
+          <div class="disco-title">One Pound</div>
+        </div>
+        <div class="disco-overlay">
+          <div class="disco-hover-label">Stream &amp; Buy →</div>
+        </div>
+      </div>
+
+      <!-- Foremast -->
+      <div class="disco-item" onclick="openModal('foremast')">
+        <img src="images/albums/foremast.jpg" alt="Foremast" onerror="this.src='https://f4.bcbits.com/img/a2536631543_5.jpg'" />
+        <div class="disco-always">
+          <div class="disco-type">Single · 2018</div>
+          <div class="disco-title">Foremast</div>
+        </div>
+        <div class="disco-overlay">
+          <div class="disco-hover-label">Stream &amp; Buy →</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== MERCH ===== -->
+<section id="merch">
+  <div class="container">
+    <div class="merch-inner">
+      <div class="merch-text">
+        <div class="section-header">
+          <h2>Merch</h2>
+          <span class="section-tag">// Bandcamp</span>
+        </div>
+        <p class="merch-desc">Physical releases and merchandise available on Bandcamp. Every purchase goes directly to the band.</p>
+        <a href="https://swarmer.bandcamp.com/merch" target="_blank" rel="noopener" class="btn btn-primary">Shop on Bandcamp</a>
+      </div>
+      <div class="merch-images">
+        <div class="merch-img-wrap">
+          <img src="images/merch-1.jpg" alt="SWARMER Merch" onerror="this.parentElement.style.background='#1a1614'" />
+        </div>
+        <div class="merch-img-wrap">
+          <img src="images/merch-2.jpg" alt="SWARMER Merch" onerror="this.parentElement.style.background='#1a1614'" />
+        </div>
+        <div class="merch-img-wrap" style="grid-column: span 2; aspect-ratio: 2/1;">
+          <img src="images/merch-shell.png" alt="SWARMER Shell Logo" style="object-fit: contain; padding: 20px; background: #111;" onerror="this.parentElement.style.background='#1a1614'" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEOS ===== -->
+<section id="videos">
+  <div class="container">
+    <div class="section-header">
+      <h2>Videos</h2>
+      <span class="section-tag">// Visual</span>
+    </div>
+    <div class="videos-grid">
+      <div class="video-item">
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/04U98PKjP1U"
+            title="SWARMER — Brutalist (Official Video)"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Brutalist</p>
+          <p class="video-subtitle">YouTube — Official Video</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 20px;">
+      <a href="https://www.youtube.com/@SwarmerMusic" target="_blank" rel="noopener" class="news-link">All Videos on YouTube</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOUR ===== -->
+<section id="tour">
+  <div class="container">
+    <div class="section-header">
+      <h2>Live</h2>
+      <span class="section-tag">// Shows</span>
+    </div>
+    <div class="tour-empty">
+      <p>Upcoming shows coming soon. Follow for announcements.</p>
+      <a href="https://www.bandsintown.com/a/525679" target="_blank" rel="noopener" class="btn btn-secondary">Track on Bandsintown</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INFO ===== -->
+<section id="info">
+  <div class="container">
+    <div class="info-inner">
+      <div class="info-left">
+        <div class="section-header">
+          <h2>About</h2>
+          <span class="section-tag">// SWARMER</span>
+        </div>
+
+        <p class="info-bio">
+          Low, heavy, ethereal, relentless progressive post-metal — Salt Lake City's <strong>SWARMER</strong> create a catharsis that bears repeating.
+        </p>
+        <p class="info-bio">
+          SWARMER is <strong>Chris Clement</strong> (Bird Eater, Dehorn), <strong>Jason Weidauer</strong> (Pilot This Plane Down, Dehorn), <strong>Peter Makowski</strong> (Form of Rocket, Accidente), and <strong>Andrew Drechsel</strong> (Bandhood, Laughter).
+        </p>
+
+        <div class="braeburn-block">
+          <p class="label-section">Label</p>
+          <p class="label-name">Braeburn Records</p>
+        </div>
+
+        <div class="members-grid">
+          <div class="member">
+            <p class="member-name">Chris Clement</p>
+            <p class="member-role">Guitar, Vocals</p>
+            <p class="member-prev">Bird Eater · Dehorn · Gaza</p>
+          </div>
+          <div class="member">
+            <p class="member-name">Jason Weidauer</p>
+            <p class="member-role">Bass, Vocals</p>
+            <p class="member-prev">Pilot This Plane Down · Dehorn</p>
+          </div>
+          <div class="member">
+            <p class="member-name">Peter Makowski</p>
+            <p class="member-role">Guitar, Vocals</p>
+            <p class="member-prev">Form of Rocket · Accidente</p>
+          </div>
+          <div class="member">
+            <p class="member-name">Andrew Drechsel</p>
+            <p class="member-role">Drums</p>
+            <p class="member-prev">Bandhood · Laughter</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+          <p class="label-section" style="margin-bottom: 8px;">Contact</p>
+          <a href="mailto:utahclem@gmail.com" style="color: var(--accent); font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; letter-spacing: 0.1em;">utahclem@gmail.com</a>
+        </div>
+
+      </div>
+      <div class="info-photo-wrap">
+        <img src="images/band-portrait.jpg" class="info-photo" alt="SWARMER" />
+        <p class="info-photo-credit">Photo: Victoria Hills</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="images/logo-white.png" alt="SWARMER" />
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://www.instagram.com/swarmermusic/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/SwarmerMusic/" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://swarmer.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a></li>
+        <li><a href="https://open.spotify.com/artist/6znLaPXU9q0o6C0zr7YoPy" target="_blank" rel="noopener">Spotify</a></li>
+        <li><a href="https://music.apple.com/us/artist/swarmer/1437441742" target="_blank" rel="noopener">Apple Music</a></li>
+        <li><a href="https://www.youtube.com/@SwarmerMusic" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://www.bandsintown.com/a/525679" target="_blank" rel="noopener">Bandsintown</a></li>
+        <li><a href="mailto:utahclem@gmail.com">Contact</a></li>
+        <li><a href="epk.html">EPK</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 SWARMER — All rights reserved &nbsp;·&nbsp; Braeburn Records</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="modalArt" class="modal-art" src="" alt="" />
+    <div class="modal-body">
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-meta" id="modalMeta"></p>
+      <ul class="modal-tracks" id="modalTracks"></ul>
+      <div class="modal-links" id="modalLinks"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JS ===== -->
+<script>
+  // Hero parallax bg load
+  window.addEventListener('load', () => {
+    document.getElementById('heroBg').classList.add('loaded');
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Close menu on nav link click
+  document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+  });
+
+  // Discography data
+  const releases = {
+    brutalist: {
+      title: 'Brutalist',
+      meta: 'Full-Length · November 2021 · Braeburn Records',
+      art: 'https://f4.bcbits.com/img/a3376614292_5.jpg',
+      tracks: ['Mediocre', 'Brutalist', 'Graveyard', 'Stardust', 'Alone', 'God/Damn'],
+      links: [
+        { label: 'Bandcamp', url: 'https://swarmer.bandcamp.com/album/brutalist' },
+        { label: 'Spotify',  url: 'https://open.spotify.com/artist/6znLaPXU9q0o6C0zr7YoPy' },
+        { label: 'Apple Music', url: 'https://music.apple.com/us/artist/swarmer/1437441742' },
+        { label: 'YouTube Music', url: 'https://music.youtube.com/@SwarmerMusic' },
+      ]
+    },
+    mediocre: {
+      title: 'Mediocre',
+      meta: 'Single · August 2021',
+      art: 'https://f4.bcbits.com/img/a3376614292_5.jpg',
+      tracks: ['Mediocre'],
+      links: [
+        { label: 'Bandcamp', url: 'https://swarmer.bandcamp.com/track/mediocre-single' },
+        { label: 'Spotify',  url: 'https://open.spotify.com/artist/6znLaPXU9q0o6C0zr7YoPy' },
+      ]
+    },
+    onepound: {
+      title: 'One Pound',
+      meta: 'EP · December 2018 · Artwork by Courtney Blair',
+      art: 'images/albums/one-pound.jpg',
+      artFallback: 'https://f4.bcbits.com/img/a2536631543_5.jpg',
+      tracks: ['Covenant', 'One Pound', 'Korihor', 'Foremast', 'Burrowed'],
+      links: [
+        { label: 'Bandcamp', url: 'https://swarmer.bandcamp.com/album/one-pound' },
+        { label: 'Spotify',  url: 'https://open.spotify.com/artist/6znLaPXU9q0o6C0zr7YoPy' },
+        { label: 'Apple Music', url: 'https://music.apple.com/us/artist/swarmer/1437441742' },
+      ]
+    },
+    foremast: {
+      title: 'Foremast',
+      meta: 'Single · September 2018',
+      art: 'images/albums/foremast.jpg',
+      tracks: ['Foremast'],
+      links: [
+        { label: 'Bandcamp', url: 'https://swarmer.bandcamp.com/track/foremast' },
+      ]
+    }
+  };
+
+  function openModal(id) {
+    const r = releases[id];
+    const overlay = document.getElementById('modalOverlay');
+    const artEl = document.getElementById('modalArt');
+    artEl.src = r.art;
+    artEl.alt = r.title;
+    if (r.artFallback) {
+      artEl.onerror = () => { artEl.src = r.artFallback; };
+    }
+    document.getElementById('modalTitle').textContent = r.title;
+    document.getElementById('modalMeta').textContent = r.meta;
+    const tracksEl = document.getElementById('modalTracks');
+    tracksEl.innerHTML = r.tracks.map((t, i) =>
+      `<li><span class="track-num">${String(i+1).padStart(2,'0')}</span>${t}</li>`
+    ).join('');
+    const linksEl = document.getElementById('modalLinks');
+    linksEl.innerHTML = r.links.map(l =>
+      `<a href="${l.url}" target="_blank" rel="noopener" class="stream-link">${l.label}</a>`
+    ).join('');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnOverlay(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>
